@@ -1,8 +1,14 @@
-#include "Engine.h"+++++++++++
+#include "Engine.h"
+#include "Keys.h"
+#include <bitset>
+#include <complex>
+using namespace std;
 
 // Function prototypes
 void myUpdate(GLFWwindow* window, double tDelta);
+void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+std::bitset<5> keys{ 0x0 };
 
 int main(void) {
 
@@ -54,10 +60,9 @@ int main(void) {
 	addObject("enemy", glm::vec2(1.0f, 0.0f), 0.0f, glm::vec2(0.75f, 0.75f), "Resources\\Textures\\alien01.png");
 
 	addObject("enemy", glm::vec2(2.0f, 0.0f), 0.0f, glm::vec2(0.75f, 0.75f), "Resources\\Textures\\alien01.png");
-
 	
-
 	setUpdateFunction(myUpdate);
+	setKeyboardHandler(myKeyboardHandler);
 
 	listGameObjectKeys();
 	listObjectCounts();
@@ -73,7 +78,7 @@ int main(void) {
 }
 
 
-float enemyPhase[3] = { 0.0f, 1.0f, 2.0f };
+float enemyPhase[3] = { glm::radians(0.0f), glm::radians(90.0f), glm::radians(270.0f) };
 float enemyPhaseVelocity[3] = { glm::radians(90.0f),
  glm::radians(90.0f),
  glm::radians(90.0f) };
@@ -93,6 +98,102 @@ void myUpdate(GLFWwindow* window, double tDelta) {
 	}
 
 
+	GameObject2D* player = getObject("player");
+	
+	static float playerSpeed = 1.0f; // distance per second
+	static float playerAngle = glm::radians(90.0f);
+	complex<float> i = complex<float>(0.0f, 1.0f);
+	auto c = exp(i * player->orientation);
+	
+
+
+
+
+	
+
+	if (keys.test(Key::W) == true) {
+
+		player->position += glm::vec2(c.real(), c.imag()) * (float)tDelta;
+		//player->position.x += 0.0f;
+		//player->position.y += playerSpeed * (float)tDelta;
+	}
+	if (keys.test(Key::S) == true) {
+
+		player->position.y -= playerSpeed * (float)tDelta;
+	}
+	if (keys.test(Key::A) == true) {
+
+		player->orientation += playerAngle * (float)tDelta;
+	}
+	if (keys.test(Key::D) == true) {
+
+		player->orientation -= playerAngle * (float)tDelta;
+	}
+
+
+
 }
+
+void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	// Check if the key was just pressed
+	if (action == GLFW_PRESS) {
+
+		// now check which key was pressed...
+		switch (key)
+		{
+		case GLFW_KEY_ESCAPE:
+			// If escape is pressed tell GLFW we want to close the window(and quit)
+				glfwSetWindowShouldClose(window, true);
+			break;
+		case GLFW_KEY_W:
+			keys[Key::W] = true;
+			break;
+		case GLFW_KEY_S:
+			keys[Key::S] = true;
+			break;
+		case GLFW_KEY_A:
+			keys[Key::A] = true;
+			break;
+		case GLFW_KEY_D:
+			keys[Key::D] = true;
+			break;
+
+
+
+
+
+		}
+	}
+	// If not pressed, check the key has just been released
+	else if (action == GLFW_RELEASE) {
+
+		switch (key)
+		{
+		case GLFW_KEY_W:
+			keys[Key::W] = false;
+			break;
+		case GLFW_KEY_S:
+			keys[Key::S] = false;
+			break;
+		case GLFW_KEY_A:
+			keys[Key::A] = false;
+			break;
+		case GLFW_KEY_D:
+			keys[Key::D] = false;
+			break;
+
+
+		}
+
+
+
+
+
+		// handle key release events
+	}
+}
+
+
 
 
