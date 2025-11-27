@@ -12,6 +12,8 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 
 std::bitset<5> keys{ 0x0 };
 
+glm::vec2 gravity = glm::vec2(0.0f, -1.0f);
+
 
 
 int main(void) {
@@ -34,7 +36,7 @@ int main(void) {
 
 	GLuint playerTexture = loadTexture("Resources\\Textures\\player1_ship.png");
 
-	Player* mainPlayer = new Player(glm::vec2(-1.5f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 1.0f);
+	Player* mainPlayer = new Player(glm::vec2(-1.5f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 0.5f);
 
 	addObject("player", mainPlayer);
 
