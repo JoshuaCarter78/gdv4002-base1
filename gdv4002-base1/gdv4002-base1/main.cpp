@@ -12,7 +12,7 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 
 std::bitset<5> keys{ 0x0 };
 
-glm::vec2 gravity = glm::vec2(0.0f, -1.0f);
+glm::vec2 gravity = glm::vec2(0.0f, -0.0f);
 
 
 
@@ -34,14 +34,18 @@ int main(void) {
 	// Setup game scene objects here
 	//
 
-	GLuint playerTexture = loadTexture("Resources\\Textures\\player1_ship.png");
+	GLuint playerTexture = loadTexture("Resources\\Textures\\myBackground.png");
 
-	Player* mainPlayer = new Player(glm::vec2(-1.5f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 0.5f);
+
+
+	GLuint playerTexture = loadTexture("Resources\\Textures\\myShip1.png");
+
+	Player* mainPlayer = new Player(glm::vec2(-1.5f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), playerTexture, 2.5f);
 
 	addObject("player", mainPlayer);
 
 
-	GLuint enemyTexture = loadTexture("Resources\\Textures\\alien01.png");
+	GLuint enemyTexture = loadTexture("Resources\\Textures\\myAsteroid1.png");
 
 	// 2. Create enemy objects
 	Enemy* enemy1 = new Enemy(glm::vec2(0.0f, 0.0f), 0.0f, glm::vec2(0.5f, 0.5f), enemyTexture, 0.0f, glm::radians(45.0f));
@@ -141,7 +145,7 @@ int main(void) {
 //	auto c = exp(i * player->orientation);
 //	
 //
-//
+// 
 //
 //
 //	
