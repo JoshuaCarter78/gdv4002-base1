@@ -17,7 +17,7 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 	for (int i = 0; i < 7; i++) 
 	{
 
-		string path = "Resources\\Textures\\snowflake" + to_string(i + 1) + string(".png");
+		string path = "Resources\\Textures\\myAsteroid1.png";
 		/*string path = "Resources\\Textures\\alien01.png";*/
 		snowflakes[i] = loadTexture(path.c_str());
 
@@ -35,8 +35,8 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 
 	spriteDist = uniform_int_distribution<int>(0, 6);
 	normDist = uniform_real_distribution<float>(-1.0f, 1.0f);
-	massDist = uniform_real_distribution<float>(0.005f, 0.08f);
-	scaleDist = uniform_real_distribution<float>(0.1f, 0.5f);
+	massDist = uniform_real_distribution<float>(0.01f, 0.05f);
+	scaleDist = uniform_real_distribution<float>(0.2f, 1.25f);
 
 
 }

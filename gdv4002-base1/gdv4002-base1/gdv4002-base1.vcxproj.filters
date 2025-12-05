@@ -45,9 +45,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>My Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>My Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Snowflake.cpp">
       <Filter>My Classes</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>My Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
       <Filter>My Classes</Filter>
     </ClInclude>
     <ClInclude Include="Snowflake.h">

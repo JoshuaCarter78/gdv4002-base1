@@ -12,8 +12,6 @@ extern glm::vec2 gravity;
 Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass) : GameObject2D(initPosition, initOrientation, initSize, initTextureID) {
 
 	this->mass = mass;
-	
-
 	velocity = glm::vec2(0.0f, 0.0f); // default to 0 velocity
 }
 
@@ -27,7 +25,10 @@ void Player::update(double tDelta) {
 
 	glm::vec2 F = glm::vec2(0.0f, 0.0f);
 
-	const float thrust = 3.5f;
+	const float thrust = 3.0f;
+	glm::vec2 airResistanceY = glm::vec2(0.0f, -1.0f);
+	glm::vec2 airResistanceX = glm::vec2(-1.0f,0.0f);
+
 
 	const float playerRotationSpeed = glm::radians(135.0f);
 
@@ -52,7 +53,22 @@ void Player::update(double tDelta) {
 		orientation += -playerRotationSpeed * (float)tDelta;
 	}
 
-	F += gravity;
+	if (F.y > 0.0f) {
+		F += airResistanceY;
+	}
+	if (F.y < 0.0f) {
+		F -= airResistanceY;
+	}
+	if (F.x > 0.0f) {
+		F += airResistanceX;
+	}
+	if (F.x < 0.0f) {
+		F -= airResistanceX;
+	}
+
+
+	/*F += gravity;*/
+
 
 	// add impulse force
 
@@ -83,12 +99,16 @@ void Player::update(double tDelta) {
 
 	// 2. calculate acceleration.  If f=ma, a = f/m
 	glm::vec2 a = F * (1.0f / mass);
+	
 
 	// 3. integate to get new velocity
 	velocity = velocity + (a * (float)tDelta);
+	
+	
 
 	// 4. integrate to get new position
 	position = position + (velocity * (float)tDelta);
+	
 
 
 
