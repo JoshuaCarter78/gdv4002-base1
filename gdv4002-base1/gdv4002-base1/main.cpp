@@ -122,6 +122,9 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 		case GLFW_KEY_D:
 			keys[Key::D] = true;
 			break;
+		case GLFW_KEY_SPACE:
+			keys[Key::SPACE] = true;
+			break;
 
 
 
@@ -146,15 +149,12 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 		case GLFW_KEY_D:
 			keys[Key::D] = false;
 			break;
+		case GLFW_KEY_SPACE:
+			keys[Key::SPACE] = false;
+			break;
 
 
 		}
-
-
-
-
-
-		// handle key release events
 	}
 }
 

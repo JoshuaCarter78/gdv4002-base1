@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Keys.h"
 #include "Engine.h"
+#include "Bullet.h"
 #include <complex>
 #include <bitset>
 
@@ -28,6 +29,7 @@ void Player::update(double tDelta) {
 	const float thrust = 3.5f;
 	const float dragCoefficient = 1.75f; // tweak to taste
 
+	loadTexture("Resources\\Textures\\myAsteroid1.png");
 
 	const float playerRotationSpeed = glm::radians(175.0f);
 
@@ -50,6 +52,9 @@ void Player::update(double tDelta) {
 	if (keys.test(Key::D) == true) {
 
 		orientation += -playerRotationSpeed * (float)tDelta;
+	}
+	if (keys.test(Key::SPACE) == true) {
+		Bullet* shot = new Bullet(position, orientation, glm::vec2(0.25f, 0.25f), GLuint("Resources\\Textures\\myAsteroid1.png"));
 	}
 
 	glm::vec2 drag = -velocity * dragCoefficient;

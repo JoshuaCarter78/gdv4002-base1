@@ -5,7 +5,7 @@
 
 Bullet::Bullet(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID) : GameObject2D(initPosition, initOrientation, initSize, initTextureID) {
 
-	speed = 5.0f;
+	speed = glm::vec2(1.5f, 1.5f);
 
 }
 
