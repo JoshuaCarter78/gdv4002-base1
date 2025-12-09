@@ -12,7 +12,7 @@ private:
 
 	unsigned long long particleNumber; // monotonically increasing particle index / number - used to set key
 
-	GLuint	snowflakes[8];
+	GLuint	Asteroids[8];
 
 	// Random number generator
 	std::mt19937 gen;

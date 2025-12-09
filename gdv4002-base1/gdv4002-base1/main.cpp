@@ -9,7 +9,7 @@ using namespace std;
 // Function prototypes
 void myUpdate(GLFWwindow* window, double tDelta);
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
-void deleteSnowlakes(GLFWwindow* window, double tDelta);
+void deleteAsteroid(GLFWwindow* window, double tDelta);
 
 std::bitset<5> keys{ 0x0 };
 
@@ -17,15 +17,15 @@ std::bitset<5> keys{ 0x0 };
 glm::vec2 gravity = glm::vec2(0.0f, -0.005f);
 
 
-void deleteSnowlakes(GLFWwindow* window, double tDelta) {
+void deleteAsteroid(GLFWwindow* window, double tDelta) {
 
-	GameObjectCollection snowflakes = getObjectCollection("snowflake");
+	GameObjectCollection Asteroid = getObjectCollection("Asteroid");
 
-	for (int i = 0; i < snowflakes.objectCount; i++) {
+	for (int i = 0; i < Asteroid.objectCount; i++) {
 
-		if (snowflakes.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) {
+		if (Asteroid.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) {
 
-			deleteObject(snowflakes.objectArray[i]);
+			deleteObject(Asteroid.objectArray[i]);
 		}
 	}
 }
@@ -55,14 +55,14 @@ int main(void) {
 	Emitter* emitter = new Emitter(
 		glm::vec2(0.0f, getViewplaneHeight() / 2.0f * 1.2f),
 		glm::vec2(getViewplaneWidth() / 2.0f, 0.0f),
-		0.3f);
+		0.625f);
 
 	addObject("emitter", emitter);
 
 
-	GLuint playerTexture = loadTexture("Resources\\Textures\\player1_ship.png");
+	GLuint playerTexture = loadTexture("Resources\\Textures\\MyShip2.png");
 
-	Player* mainPlayer = new Player(glm::vec2(0.0f, -1.5f), glm::radians(90.0f), glm::vec2(0.5f, 0.5f), playerTexture, 2.0f);
+	Player* mainPlayer = new Player(glm::vec2(0.0f, -1.5f), glm::radians(90.0f), glm::vec2(0.625f, 0.635f), playerTexture, 1.50f);
 
 	addObject("player", mainPlayer);
 
@@ -81,7 +81,7 @@ int main(void) {
 	listGameObjectKeys();
 	listObjectCounts();
 
-	setUpdateFunction(deleteSnowlakes, false);
+	setUpdateFunction(deleteAsteroid, false);
 
 
 

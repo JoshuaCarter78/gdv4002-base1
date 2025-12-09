@@ -1,6 +1,6 @@
 #include "Emitter.h"
 #include "Engine.h"
-#include "Snowflake.h"
+#include "Asteroid.h"
 
 
 using namespace std;
@@ -18,10 +18,10 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 	{
 
 		string path = "Resources\\Textures\\myAsteroid1.png";
-		/*string path = "Resources\\Textures\\alien01.png";*/
-		snowflakes[i] = loadTexture(path.c_str());
+		
+		Asteroids[i] = loadTexture(path.c_str());
 
-		if (snowflakes[i] > 0)
+		if (Asteroids[i] > 0)
 			cout << "successfully loaded texture " << path << endl;
 		else
 			cout << "failed to load texture " << path << endl;
@@ -35,8 +35,8 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 
 	spriteDist = uniform_int_distribution<int>(0, 6);
 	normDist = uniform_real_distribution<float>(-1.0f, 1.0f);
-	massDist = uniform_real_distribution<float>(0.01f, 0.05f);
-	scaleDist = uniform_real_distribution<float>(0.2f, 1.25f);
+	massDist = uniform_real_distribution<float>(0.05f, 0.1f);
+	scaleDist = uniform_real_distribution<float>(0.25f, 0.8f);
 
 
 }
@@ -67,9 +67,9 @@ void Emitter::update(double tDelta)
 		float rotationSpeed = glm::radians(normDist(gen) * 45.0f);
 		int spriteIndex = spriteDist(gen);
 
-		Snowflake* s1 = new Snowflake(glm::vec2(x, y), 0.0f, glm::vec2(scale, scale), snowflakes[spriteIndex], mass, rotationSpeed);
+		Asteroid* a1 = new Asteroid(glm::vec2(x, y), 0.0f, glm::vec2(scale, scale), Asteroids[spriteIndex], mass, rotationSpeed);
 
-		string key = string("snowflake");
+		string key = string("Asteroid");
 
 		if (particleNumber > 0) { // first name in collection must not be numbered if using this approach
 
@@ -79,7 +79,7 @@ void Emitter::update(double tDelta)
 
 		particleNumber++;
 
-		addObject(key.c_str(), s1);
+		addObject(key.c_str(), a1);
 
 	}
 }
