@@ -10,6 +10,7 @@ using namespace std;
 void myUpdate(GLFWwindow* window, double tDelta);
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 void deleteAsteroid(GLFWwindow* window, double tDelta);
+void deleteBullet(GLFWwindow* window, double tDelta);
 
 std::bitset<5> keys{ 0x0 };
 
@@ -29,6 +30,33 @@ void deleteAsteroid(GLFWwindow* window, double tDelta) {
 		}
 	}
 }
+
+void deleteBullet(GLFWwindow* window, double tDelta) {
+
+	GameObjectCollection Bullet = getObjectCollection("Bullet");
+
+	for (int i = 0; i < Bullet.objectCount; i++) {
+
+		if (Bullet.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) {
+
+			deleteObject(Bullet.objectArray[i]);
+		}
+		if (Bullet.objectArray[i]->position.x < -(getViewplaneHeight() / 2.0f)) {
+
+			deleteObject(Bullet.objectArray[i]);
+		}
+		if (Bullet.objectArray[i]->position.y < (getViewplaneHeight() / 2.0f)) {
+
+			deleteObject(Bullet.objectArray[i]);
+		}
+		if (Bullet.objectArray[i]->position.x < (getViewplaneHeight() / 2.0f)) {
+
+			deleteObject(Bullet.objectArray[i]);
+		}
+	}
+}
+
+
 
 int main(void) {
 
@@ -66,15 +94,14 @@ int main(void) {
 
 	addObject("player", mainPlayer);
 
+	GameObject2D* startText = new GameObject2D();
+	startText->position = glm::vec2(0.0f, 1.0f);
+	GLuint GameStartTexture = loadTexture("Resources\\Textures\\GameStart.png");
+	startText->textureID = GameStartTexture;
+	addObject("Text", startText);
 
 
 
-
-
-
-
-	
-	
 
 	setKeyboardHandler(myKeyboardHandler);
 
@@ -82,7 +109,6 @@ int main(void) {
 	listObjectCounts();
 
 	setUpdateFunction(deleteAsteroid, false);
-
 
 
 
@@ -95,6 +121,18 @@ int main(void) {
 	// return success :)
 	return 0;
 }
+
+
+void myUpdate(GLFWwindow* window, double tDelta) {
+	int secondsElapsed = secondsElapsed++;
+	
+	if (secondsElapsed = 5) {
+		getObject 
+		deleteObject(startText);
+	}
+	
+}
+
 
 
 
@@ -125,10 +163,6 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 		case GLFW_KEY_SPACE:
 			keys[Key::SPACE] = true;
 			break;
-
-
-
-
 
 		}
 	}

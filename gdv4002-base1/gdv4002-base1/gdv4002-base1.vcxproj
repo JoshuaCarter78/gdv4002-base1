@@ -140,7 +140,6 @@ copy "$(SolutionDir)Libs\FreeImage\Wrapper\FreeImagePlus\dist\x64\FreeImagePlus.
     <ClCompile Include="GameObject2D.cpp" />
     <ClCompile Include="GUClock.cpp" />
     <ClCompile Include="GUMemory.cpp" />
-    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="GUObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -155,7 +154,6 @@ copy "$(SolutionDir)Libs\FreeImage\Wrapper\FreeImagePlus\dist\x64\FreeImagePlus.
     <ClInclude Include="GraphicsCore.h" />
     <ClInclude Include="GUClock.h" />
     <ClInclude Include="GUMemory.h" />
-    <ClInclude Include="Gun.h" />
     <ClInclude Include="GUObject.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="Player.h" />

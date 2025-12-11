@@ -5,7 +5,7 @@
 class Bullet : public GameObject2D {
 
 private:
-	glm::vec2 speed;
+	glm::vec2 velocity;
 
 
 public:

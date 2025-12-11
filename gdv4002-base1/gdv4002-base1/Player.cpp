@@ -18,8 +18,6 @@ Player::Player(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize
 
 
 
-
-
 void Player::update(double tDelta) {
 
 
@@ -28,9 +26,6 @@ void Player::update(double tDelta) {
 
 	const float thrust = 3.5f;
 	const float dragCoefficient = 1.75f; // tweak to taste
-
-	loadTexture("Resources\\Textures\\myAsteroid1.png");
-
 	const float playerRotationSpeed = glm::radians(175.0f);
 
 	std::complex<float> i = std::complex<float>(0.0f, 1.0f);
@@ -54,13 +49,16 @@ void Player::update(double tDelta) {
 		orientation += -playerRotationSpeed * (float)tDelta;
 	}
 	if (keys.test(Key::SPACE) == true) {
-		Bullet* shot = new Bullet(position, orientation, glm::vec2(0.25f, 0.25f), GLuint("Resources\\Textures\\myAsteroid1.png"));
+		GLuint bulletTexture = loadTexture("Resources\\Textures\\myBullet2.png");
+		Bullet* shot = new Bullet(position, orientation, glm::vec2(0.1f, 0.1f), bulletTexture);
+		addObject("bullet", shot);
+		
 	}
 
 	glm::vec2 drag = -velocity * dragCoefficient;
 	F += drag;
 
-	/*F += gravity;*/
+	//F += gravity;
 
 
 	// add impulse force
